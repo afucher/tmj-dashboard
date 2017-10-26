@@ -1,9 +1,17 @@
+
   <thf-input
     name="sprintID"
     t-label="Sprint ID"
     t-help="Digite o ID da Sprint"
+    [(ngModel)]="sprint"
     t-focus
-    t-clean>
+    t-clean
+    ngDefaultControl
+    >
   </thf-input>
 
-  <thf-button t-label="Carregar"></thf-button>
+  <thf-button (t-click)="getIssues()" t-label="Carregar"></thf-button>
+  
+  <li *ngFor="let issue of issues">
+    <span class="badge">{{issue.id}}</span>: {{issue.fields.description}}
+  </li>

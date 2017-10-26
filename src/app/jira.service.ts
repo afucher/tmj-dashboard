@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class JiraService {
-    getSprintIssues(sprint: string): object{
-        return {"issues":[{
+    getSprintIssues(sprint: string): Array<object>{
+        return [{
             "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
             "id": "507456",
             "self": "http://localhost/rest/agile/1.0/issue/507456",
@@ -22,6 +22,6 @@ export class JiraService {
               "summary": "Issue02",
               "description": "Explicação da issue02 bem mais completa"
             }
-          }]};
+          }];
     }
 }
