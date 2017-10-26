@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/@totvs/thf-theme-default/css/thf-theme-default.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

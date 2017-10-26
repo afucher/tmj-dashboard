@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  menus = [
+    { label: 'Sprint Issues', link: './sprint-issues' },
+    ];
 }
