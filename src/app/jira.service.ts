@@ -1,27 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class JiraService {
-    getSprintIssues(sprint: string): Array<object>{
-        return [{
-            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
-            "id": "507456",
-            "self": "http://localhost/rest/agile/1.0/issue/507456",
-            "key": "DFRM1-3175",
-            "fields": {
-              "summary": "Issue01",
-              "description": "Explicação da issue01 bem mais completa"
-            }
-          },
-          {
-            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
-            "id": "486141",
-            "self": "http://localhost/rest/agile/1.0/issue/486141",
-            "key": "DFRM1-2913",
-            "fields": {
-              "summary": "Issue02",
-              "description": "Explicação da issue02 bem mais completa"
-            }
-          }];
+    private apiUrl = 'http://localhost:3000/sprints/123/issues';
+
+    constructor(private http: Http){};
+    getSprintIssues(sprint: string): Promise<object[]>{
+        return this.http.post(this.apiUrl,"")
+        .toPromise()
+        .then(response => response.json().data as object[])
+        .catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+      console.error('An error occurred', error); // for demo purposes only
+      return Promise.reject(error.message || error);
     }
 }

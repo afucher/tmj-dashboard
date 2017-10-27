@@ -16,7 +16,8 @@ export class SprintIssuesComponent implements OnInit {
 
   getIssues(): void {
     if(this.sprint)
-      this.issues = this.jiraService.getSprintIssues(this.sprint);
+      this.jiraService.getSprintIssues(this.sprint)
+          .then(issues => this.issues = issues);
   }
 
   ngOnInit() {
