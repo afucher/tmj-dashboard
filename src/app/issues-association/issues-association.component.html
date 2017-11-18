@@ -1,0 +1,19 @@
+
+  <thf-input
+    name="project"
+    t-label="Projeto"
+    t-help="Digite o Projeto que deseja"
+    [(ngModel)]="project"
+    t-focus
+    t-clean
+    ngDefaultControl
+    >
+  </thf-input>
+
+  <thf-button (t-click)="getIssues()" t-label="Carregar"></thf-button>
+
+  <div  *ngIf="issues">
+    <div *ngFor="let issue of issues">
+      <a href={{issue.url}}>{{issue.key}}</a> - {{issue.count}} - {{issue.status}}
+    </div>
+</div>

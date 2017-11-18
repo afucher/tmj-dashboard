@@ -12,10 +12,11 @@
 
   <thf-button (t-click)="getIssues()" t-label="Carregar"></thf-button>
 
-  <div class="thf-row" *ngIf="issues">
+  <div  *ngIf="issues">
     <thf-widget *ngFor="let issue of issues"
     [t-title]="issue.fields.summary"
-    t-size="md">
-      <span class="badge">{{issue.id}}</span>: {{issue.fields.description}}
+    [t-height]="50"
+    t-size="sm">
+      <a href={{issue.url}}><span class="badge">{{issue.key}}</span></a>
     </thf-widget>
 </div>

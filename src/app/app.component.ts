@@ -9,5 +9,6 @@ export class AppComponent {
   title = 'app';
   menus = [
     { label: 'Sprint Issues', link: './sprint-issues' },
+    { label: 'Associados', link: './issues-association' },
     ];
 }
