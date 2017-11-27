@@ -28,4 +28,14 @@ export class JiraService {
         .then(response => response.json() as object[])
         .catch(this.handleError);
     }
+
+    getIssueSLA(issueID: string): Promise<any>{
+      let url = this.apiUrl + 'issues/SLA';
+      let params: URLSearchParams = new URLSearchParams();
+      params.set('issuedIDs', issueID);
+      return this.http.get(url, {params:{issueIDs:issueID}})
+              .toPromise()
+              .then(response => response.json() as object[])
+              .catch(this.handleError);
+    }
 }

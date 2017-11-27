@@ -14,6 +14,6 @@
 
   <div  *ngIf="issues">
     <div *ngFor="let issue of issues">
-      <a href={{issue.url}}>{{issue.key}}</a> - {{issue.count}} - {{issue.status}}
+      <a href={{issue.url}}>{{issue.key}}</a> - {{issue.association.length}} - {{issue.status}} - {{issue.sla}}
     </div>
 </div>

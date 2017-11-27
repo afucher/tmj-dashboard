@@ -23,15 +23,46 @@ export class IssuesAssociationComponent implements OnInit {
               let parent = issue.fields ? issue.fields.parent : null;
               if(parent){
                 let index = counter.findIndex(issue => issue.key == parent.key );
-                index >= 0 ? counter[index].count++ : counter.push(this.mountObject(parent));
+                if(index < 0){
+                  counter.push(this.mountObject(parent));
+                  index = counter.length-1;
+                }
+
+                counter[index].association.push({key:issue.key});
+
               }
               return counter;
             },[]);
+          })
+          .then(() => {
+            this.issues.forEach(issue => {
+              let issuesAssociation = issue.association.reduce( (issueIDs: string, issueAssociated: any) => {
+                return issueIDs + issueAssociated.key + ',';
+              },"");
+              issuesAssociation += issue.key;
+              this.jiraService.getIssueSLA(issuesAssociation)
+                  .then(issuesSLA => {
+                    let minorSLA = issuesSLA.reduce( (date: string, issueSLA: any ) => {
+                      if(date == "") return issueSLA.sla;
+
+                      var parts =date.split('/');
+                      var d1 = Number(parts[2] + parts[1] + parts[0]);
+                      parts =issueSLA.sla.split('/');
+                      var d2 = Number(parts[2] + parts[1] + parts[0]);
+
+                      if(d2 < d1) return issueSLA.sla;
+
+                      return date;
+
+                    },"");
+                  issue['sla'] = minorSLA;
+                });
+            });
           });
   }
 
   private mountObject( parentIssue : any ){
-    return {key: parentIssue.key, count : 1, url: parentIssue.url, status: parentIssue.fields.status.name};
+    return {key: parentIssue.key, association : [], url: parentIssue.url, status: parentIssue.fields.status.name};
   }
 
   ngOnInit() {
