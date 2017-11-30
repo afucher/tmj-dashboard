@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SprintIssuesComponent } from './sprint-issues/sprint-issues.component';
 import { IssuesAssociationComponent } from './issues-association/issues-association.component';
+import { IssueAssociationGridComponent } from './issue-association-grid/issue-association-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SprintIssuesComponent,
-    IssuesAssociationComponent
+    IssuesAssociationComponent,
+    IssueAssociationGridComponent
   ],
   imports: [
     BrowserModule,
