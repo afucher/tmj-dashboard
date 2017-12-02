@@ -30,7 +30,7 @@ export class IssueAssociationGridComponent implements OnInit {
 
    get issues(): Array<any> { return this._issues };
 
-   public openUrl(item) {
+   openURL(item) {
      window.open(item.url, "_blank");
    }
 
