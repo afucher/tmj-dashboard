@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ThfTableColumn, ThfTableAction } from '@totvs/thf-core/components/thf-table-base/';
+import { ThfTableColumn, ThfTableAction } from '@totvs/thf-ui/components/thf-table/';
 
 @Component({
   selector: 'app-issue-association-grid',
@@ -12,14 +12,14 @@ export class IssueAssociationGridComponent implements OnInit {
     {column: "associationCount", label:"Qtd. Associados"},
     {column: "status", label: "Status"},
     {column: "sla", label: "SLA", type: "date"},
-  ];
-  
+  ]
+
   issueActions: ThfTableAction[] = [
-    { action: 'openURL', label: 'Abrir Issue' }
-  ];
+    { action: 'openUrl', label: 'Abrir Issue' }
+  ]
 
   private _issues: Array<any>;
-  
+
    @Input()
    set issues(issues: Array<any>) {
      this._issues = issues.map( issue => {
@@ -30,7 +30,8 @@ export class IssueAssociationGridComponent implements OnInit {
 
    get issues(): Array<any> { return this._issues };
 
-   openURL(item) {
+   openUrl(item) {
+     //console.log("teste");
      window.open(item.url, "_blank");
    }
 

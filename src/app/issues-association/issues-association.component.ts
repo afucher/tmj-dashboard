@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JiraService } from '../jira.service';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/first';
 
 @Component({
   selector: 'app-sprint-issues',
@@ -18,7 +20,7 @@ export class IssuesAssociationComponent implements OnInit {
     if(this.project)
       this.issues = [];
       this.jiraService.getAssociationIssues(this.project)
-          .then(issues => {
+          .subscribe(issues => {
             this.issues = issues.reduce( (counter: Array<any>, issue: any) => {
               let parent = issue.fields ? issue.fields.parent : null;
               if(parent){
@@ -32,16 +34,15 @@ export class IssuesAssociationComponent implements OnInit {
 
               }
               return counter;
-            },[]);
-          })
-          .then(() => {
+            },[])
+
             this.issues.forEach(issue => {
               let issuesAssociation = issue.association.reduce( (issueIDs: string, issueAssociated: any) => {
                 return issueIDs + issueAssociated.key + ',';
               },"");
               issuesAssociation += issue.key;
               this.jiraService.getIssueSLA(issuesAssociation)
-                  .then(issuesSLA => {
+                  .subscribe(issuesSLA => {
                     let minorSLA = issuesSLA.reduce( (date: string, issueSLA: any ) => {
                       if(date == "") return issueSLA.sla;
 
@@ -56,9 +57,9 @@ export class IssuesAssociationComponent implements OnInit {
 
                     },"");
                   issue['sla'] = minorSLA;
-                });
+                })
             });
-          });
+          })         
   }
 
   private mountObject( parentIssue : any ){

@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ThfModule } from '@totvs/thf-web';
+import { ThfModule } from '@totvs/thf-ui';
 import { FormsModule } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
+import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -20,10 +20,10 @@ import { IssueAssociationGridComponent } from './issue-association-grid/issue-as
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ThfModule,
-    AppRoutingModule,
-    HttpModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
